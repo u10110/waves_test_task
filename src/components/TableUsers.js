@@ -3,15 +3,16 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 class TableUsers extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            data: []
+            data: props.data ? props.data : []
         };
     }
 
     render() {
         const { data } = this.state;
+        const { onEdit, onDelete } = { ... this.props }
         return (
             <div>
                 <ReactTable
@@ -37,6 +38,17 @@ class TableUsers extends React.Component {
                                 {
                                     Header: "Телефон",
                                     accessor: "phone"
+                                },
+                                {
+                                    Header: "",
+                                    accessor: "edit",
+                                    Cell: (row) => (
+                                        <div onClick={ () => {onEdit( row.original, row.index )} } className="pointer">Редактировать</div>
+                                    )
+                                },
+                                {
+                                    Header: "",
+                                    accessor: "delete"
                                 }
 
                     ]}

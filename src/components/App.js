@@ -21,7 +21,9 @@ class App extends Component {
         super();
 
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            user : {},
+            index: 0
         };
 
         this.openModal = this.openModal.bind(this);
@@ -29,8 +31,8 @@ class App extends Component {
         this.closeModal = this.closeModal.bind(this);
     }
 
-    openModal() {
-        this.setState({modalIsOpen: true});
+    openModal(user,index) {
+        this.setState({ user: user, modalIsOpen: true});
     }
 
     afterOpenModal() {
@@ -40,15 +42,15 @@ class App extends Component {
         this.setState({modalIsOpen: false});
     }
 
-    saveUser( User ){
+    saveUser( user, index ){
 
         let storedUsers = JSON.parse(localStorage.getItem("Users"));
 
-        if( storedUsers === undefined ){
+        if( !storedUsers ){
             storedUsers = [];
         }
 
-        storedUsers.push(User);
+        storedUsers.push(user);
         localStorage.setItem("Users", JSON.stringify(storedUsers));
     }
 
@@ -67,11 +69,15 @@ class App extends Component {
               ariaHideApp={false}
           >
               <UserForm
+                  user={this.state.user}
                   onCancel={ () => { this.closeModal() } }
-                  onSubmit={ ( User ) => { this.saveUser( User ) }}
+                  onSubmit={ ( user ) => { this.saveUser( user ) }}
               />
           </Modal>
-        <TableUsers/>
+        <TableUsers
+            data={JSON.parse(localStorage.getItem("Users"))}
+            onEdit={ ( index ) => { this.openModal(user,index) } }
+        />
       </div>
     );
   }

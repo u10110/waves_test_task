@@ -73,3 +73,16 @@ button:hover,input[type=submit]:hover,input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
+
+.ReactTable .rt-noData {
+    z-index: 0;
+}
+
+.error{
+    color:#FF0000;
+    float:right;
+}
+
+.pointer{
+    cursor:pointer
+}
