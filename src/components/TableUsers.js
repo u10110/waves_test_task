@@ -5,13 +5,10 @@ class TableUsers extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            data: props.data ? props.data : []
-        };
     }
 
     render() {
-        const { data } = this.state;
+        const { data } = this.props;
         const { onEdit, onDelete } = { ... this.props }
         return (
             <div>

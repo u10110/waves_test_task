@@ -23,7 +23,6 @@ class App extends Component {
         this.state = {
             modalIsOpen: false,
             user : {},
-            index: 0,
             data : JSON.parse(localStorage.getItem("Users"))
         };
 
@@ -33,6 +32,7 @@ class App extends Component {
     }
 
     openModal(user,index) {
+        console.log(index)
         this.setState({ user: user, index: index, modalIsOpen: true});
     }
 
@@ -43,23 +43,23 @@ class App extends Component {
         this.setState({modalIsOpen: false});
     }
 
-    saveUser( user, index ){
+    saveUser( user  ){
 
         let storedUsers = JSON.parse(localStorage.getItem("Users"));
 
         if( !storedUsers ){
             storedUsers = [];
         }
-
-        if( this.state.index >0 ){
-            storedUsers[ index ] = user;
+console.log( this.state.index )
+        if( this.state.index !== undefined ){
+            storedUsers[ this.state.index ] = user;
         }else{
             storedUsers.push(user);
         }
 
         localStorage.setItem("Users", JSON.stringify(storedUsers));
 
-        //this.setState( { data : storedUsers })
+        this.setState( { data : storedUsers })
     }
 
     onDelete( index ){
@@ -69,7 +69,7 @@ class App extends Component {
         if( storedUsers ){
             storedUsers.splice( index, 1 )
             localStorage.setItem("Users", JSON.stringify(storedUsers));
-            //this.setState( { data : storedUsers })
+            this.setState( { data : storedUsers })
         }
 
     }
