@@ -23,7 +23,8 @@ class App extends Component {
         this.state = {
             modalIsOpen: false,
             user : {},
-            index: 0
+            index: 0,
+            data : JSON.parse(localStorage.getItem("Users"))
         };
 
         this.openModal = this.openModal.bind(this);
@@ -32,7 +33,7 @@ class App extends Component {
     }
 
     openModal(user,index) {
-        this.setState({ user: user, modalIsOpen: true});
+        this.setState({ user: user, index: index, modalIsOpen: true});
     }
 
     afterOpenModal() {
@@ -50,10 +51,28 @@ class App extends Component {
             storedUsers = [];
         }
 
-        storedUsers.push(user);
+        if( this.state.index >0 ){
+            storedUsers[ index ] = user;
+        }else{
+            storedUsers.push(user);
+        }
+
         localStorage.setItem("Users", JSON.stringify(storedUsers));
+
+        //this.setState( { data : storedUsers })
     }
 
+    onDelete( index ){
+
+        let storedUsers = JSON.parse(localStorage.getItem("Users"));
+
+        if( storedUsers ){
+            storedUsers.splice( index, 1 )
+            localStorage.setItem("Users", JSON.stringify(storedUsers));
+            //this.setState( { data : storedUsers })
+        }
+
+    }
 
     render() {
     return (
@@ -75,8 +94,9 @@ class App extends Component {
               />
           </Modal>
         <TableUsers
-            data={JSON.parse(localStorage.getItem("Users"))}
-            onEdit={ ( index ) => { this.openModal(user,index) } }
+            data={ this.state.data }
+            onEdit={ ( user, index ) => { this.openModal(user,index) } }
+            onDelete={ ( index ) => { this.onDelete(index) } }
         />
       </div>
     );

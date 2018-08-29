@@ -43,12 +43,16 @@ class TableUsers extends React.Component {
                                     Header: "",
                                     accessor: "edit",
                                     Cell: (row) => (
-                                        <div onClick={ () => {onEdit( row.original, row.index )} } className="pointer">Редактировать</div>
+                                        <div onClick={ () => { onEdit( row.original, row.index )} } className="pointer">Редактировать</div>
                                     )
                                 },
                                 {
                                     Header: "",
-                                    accessor: "delete"
+                                    accessor: "delete",
+                                    Cell: (row) => (
+                                        <div onClick={ () => { onDelete( row.index )} } className="pointer">Удалить</div>
+                                    )
+
                                 }
 
                     ]}

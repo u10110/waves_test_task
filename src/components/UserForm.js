@@ -13,6 +13,13 @@ class UserForm extends React.Component {
         };
     }
 
+    onChange( name, value ){
+
+        let { user } = { ...this.state }
+        user[ name ] = value
+        this.setState( { user : user } )
+    }
+
     handleSubmit( event ){
         event.preventDefault();
         const data = event.target.elements;
@@ -62,7 +69,7 @@ class UserForm extends React.Component {
 
     render() {
         const { user, errors } = this.state;
-        const { onCancel, onSubmit } =  { ... this.props };
+        const { onCancel } =  { ... this.props };
 
         const beginBirthYear = 1958
         return (
@@ -71,23 +78,23 @@ class UserForm extends React.Component {
                 <form onSubmit={ (e) => { this.handleSubmit(e) } } >
 
                     <label htmlFor="fio">ФИО* <span className="error"> { errors.fio ? 'Обязательно для заполнения' : ' ' }</span> </label><br/>
-                    <input type="text" name="fio" maxLength={100} value={user.fio}  />
+                    <input type="text" name="fio" maxLength={100} value={user.fio}  onChange={ e => this.onChange( 'fio', e.target.value ) } />
 
                     <label >Дата рождения</label>
                     <br/>
-                    <select name="birthDay" value={user.birthDay} >
+                    <select name="birthDay" value={user.birthDay} onChange={ e => this.onChange( 'birthDay', e.target.value ) } >
                         { range(31).map(function(i){
                             let value = i+1;
                             return    <option key={i}  >{value}</option>;
                         })}
                     </select>
-                    <select  name="birthMonth" value={user.birthMonth}>
+                    <select  name="birthMonth" value={user.birthMonth} onChange={ e => this.onChange( 'birthMonth', e.target.value ) } >
                         { range(12).map(function(i){
                             let value = i+1;
                             return    <option key={i} >{value}</option>;
                         })}
                     </select>
-                    <select name="birthYear" value={user.birthYear} >
+                    <select name="birthYear" value={user.birthYear} onChange={ e => this.onChange( 'birthYear', e.target.value ) } >
                         { range(60).map(function(i){
                             let value = i+beginBirthYear
                             return    <option  key={i}  >{value}</option>;
@@ -97,13 +104,13 @@ class UserForm extends React.Component {
                     <br/>
 
                     <label htmlFor="address">Адрес*  <span className="error"> { errors.address ? 'Обязательно для заполнения' : ' ' }</span></label>
-                    <input type="text" name="address" value={user.address} />
+                    <input type="text" name="address" value={user.address} onChange={ e => this.onChange( 'address', e.target.value ) } />
 
                     <label htmlFor="town">Город* <span className="error"> { errors.town ? 'Обязательно для заполнения' : ' ' }</span></label>
-                    <input type="text" name="town"  value={user.town} />
+                    <input type="text" name="town"  value={user.town} onChange={ e => this.onChange( 'town', e.target.value ) } />
 
                     <label htmlFor="phone">Телефон* <span className="error"> { errors.phone ? 'Обязательно для заполнения' : ' ' }</span></label>
-                    <InputMask name="phone"  mask="+7(999) 999-99-99" type='text' value={user.phone}  />
+                    <InputMask name="phone"  mask="+7(999) 999-99-99" type='text' value={user.phone}  onChange={ e => this.onChange( 'phone', e.target.value ) } />
 
                     <input type="submit" value="Сохранить" />
 
