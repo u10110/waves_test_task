@@ -2,43 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Modal from "react-modal";
 
-import * as UserActions from '../actions';
+import { addUser } from '../actions';
 import { TableUsers, UserForm } from '../components';
-
-const customStyles = {
-    content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)'
-    }
-};
 
 
 class UsersApp extends Component {
 
+
     render () {
+        const { modalIsOpen, user } = this.props
+        let { addUser } = this.props
 
         return (
             <div >
-                <div align="right">
-                    <button type="button" onClick={this.openModal} >Добавить пользователя</button>
-                </div>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    ariaHideApp={false}
-                >
-                    <UserForm
-                        user={this.state.user}
-                        onCancel={ () => { this.closeModal() } }
-                        onSubmit={ ( user ) => { this.saveUser( user ) }}
-                    />
-                </Modal>
+                <UserForm />
                 <TableUsers/>
             </div>
         );
@@ -46,10 +23,11 @@ class UsersApp extends Component {
 }
 
 const mapStateToProps = function(store) {
-
+console.log(store)
     return {
-        modalIsOpen: store.default.modalIsOpen
+        users : store.users
     };
 }
+
 
 export default connect(mapStateToProps)(UsersApp);

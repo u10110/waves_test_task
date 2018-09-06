@@ -11,7 +11,6 @@ class TableUsers extends React.Component {
 
     render() {
         const { data } = this.props;
-        const { onEdit, onDelete } = { ... this.props }
         return (
             <div>
                 <ReactTable
@@ -42,14 +41,14 @@ class TableUsers extends React.Component {
                                     Header: "",
                                     accessor: "edit",
                                     Cell: (row) => (
-                                        <div onClick={ () => { onEdit( row.original, row.index )} } className="pointer">Редактировать</div>
+                                        <div onClick={ () => { } } className="pointer">Редактировать</div>
                                     )
                                 },
                                 {
                                     Header: "",
                                     accessor: "delete",
                                     Cell: (row) => (
-                                        <div onClick={ () => { onDelete( row.index )} } className="pointer">Удалить</div>
+                                        <div onClick={ () => { } } className="pointer">Удалить</div>
                                     )
 
                                 }

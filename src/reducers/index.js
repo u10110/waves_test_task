@@ -1,7 +1,11 @@
 import * as types from '../constants'
 
 const initialState = {
-    modalIsOpen : true,
+    userForm : {
+        modalIsOpen : false,
+        user : {},
+        errors : {}
+    },
     users : [
         {
             fio : 'Test',
@@ -13,21 +17,10 @@ const initialState = {
 };
 
 export default function users(state = initialState, action) {
+    console.log(action)
     switch (action.type) {
-
         case types.ADD_USER:
-            const newId = state.friends[state.friends.length-1] + 1;
-            return {
-                friends: state.friends.concat(newId),
-                friendsById: {
-                    ...state.friendsById,
-                    [newId]: {
-                        id: newId,
-                        name: action.name
-                    }
-                }
-            }
-
+            return { ...state, ...action.payload }
         default:
             return state;
     }

@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import UsersApp from './UsersApp';
 import '../assets/css/App.css';
 
-import * as reducers from '../reducers';
+import reducer from '../reducers';
 
-const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
 
