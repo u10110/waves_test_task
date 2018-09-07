@@ -19,8 +19,14 @@ const initialState = {
 export default function users(state = initialState, action) {
     console.log(action)
     switch (action.type) {
+        case types.OPEN_FORM:
+            return { ...state, userForm : {...action.payload } };
+        case types.CLOSE_FORM:
+            return { ...state, userForm : {...action.payload } };
         case types.ADD_USER:
-            return { ...state, ...action.payload }
+            return { ...state, userForm : { user : action.payload } };
+        case types.SHOW_ERRORS:
+            return { ...state, userForm : { ...state.userForm ,errors : action.payload.errors } };
         default:
             return state;
     }

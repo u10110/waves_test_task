@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 
-class TableUsers extends React.Component {
+function TableUsers(props){
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const { data } = this.props;
+        const { data } = props;
         return (
             <div>
                 <ReactTable
@@ -60,7 +55,7 @@ class TableUsers extends React.Component {
                 <br />
             </div>
         );
-    }
+
 }
 
 export default TableUsers;

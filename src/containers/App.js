@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { combineReducers, createStore } from 'redux';
+import {  createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import UsersApp from './UsersApp';
+import UserApp from './UserApp';
 import '../assets/css/App.css';
 
 import reducer from '../reducers';
 
 const store = createStore(reducer);
-
 
 
 class App extends Component {
@@ -18,7 +17,7 @@ class App extends Component {
         return (
           <div className="App">
               <Provider store={store}>
-                    <UsersApp />
+                    <UserApp />
               </Provider>
           </div>
         );
